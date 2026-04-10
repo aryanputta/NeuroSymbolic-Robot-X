@@ -1,0 +1,74 @@
+# @package _global_
+eval:
+  n_episodes: 100
+  seed: 42
+  deterministic: true
+  render: false
+  save_videos: true
+  video_fps: 30
+
+  tasks:
+    - pick_and_place
+    - sort_objects
+    - stack_blocks
+    - drawer_insert
+    - recovery
+
+  baselines:
+    rl_only:
+      enabled: true
+      checkpoint: models/checkpoints/rl_only_best.pt
+    scripted_plus_rl:
+      enabled: true
+      checkpoint: models/checkpoints/scripted_rl_best.pt
+    hybrid:
+      enabled: true
+      checkpoint: models/checkpoints/hybrid_best.pt
+
+  noise_suite:
+    enabled: true
+    levels: [none, low, medium, high]
+
+    camera_noise:
+      std_values: [0.0, 0.02, 0.05, 0.1]
+
+    depth_noise:
+      std_values: [0.0, 0.005, 0.015, 0.03]
+
+    actuation_noise:
+      std_values: [0.0, 0.01, 0.03, 0.06]
+
+    observation_delay:
+      steps: [0, 2, 5, 10]  # timestep delays
+
+    action_delay:
+      steps: [0, 1, 3, 5]
+
+    dropped_frames:
+      probabilities: [0.0, 0.05, 0.1, 0.2]
+
+    friction_variation:
+      ranges: [[0.5, 0.5], [0.3, 0.7], [0.2, 0.8], [0.1, 0.9]]
+
+    object_perturbation:
+      position_std: [0.0, 0.01, 0.02, 0.05]
+
+  metrics:
+    primary:
+      - task_success_rate
+      - avg_completion_time
+      - collision_count
+      - recovery_success_rate
+      - replan_count
+    secondary:
+      - reward_per_episode
+      - path_efficiency
+      - policy_smoothness
+      - inference_latency
+
+  output:
+    results_dir: results/
+    save_tables: true
+    save_figures: true
+    export_csv: true
+    export_json: true

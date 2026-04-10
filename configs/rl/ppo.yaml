@@ -1,0 +1,57 @@
+# @package _global_
+rl:
+  algorithm: ppo
+
+  ppo:
+    # Network
+    policy: MlpPolicy  # MlpPolicy | CnnPolicy | MultiInputPolicy
+    n_steps: 2048
+    batch_size: 64
+    n_epochs: 10
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    clip_range_vf: null
+    normalize_advantage: true
+    ent_coef: 0.01
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    use_sde: false
+    sde_sample_freq: -1
+    target_kl: null
+
+    # Network architecture
+    policy_kwargs:
+      net_arch: [256, 256, 128]
+      activation_fn: relu
+      ortho_init: true
+
+    # Training
+    total_timesteps: 1_000_000
+    learning_rate: 3.0e-4
+    lr_schedule: linear  # constant | linear
+    n_envs: 4
+
+    # Logging
+    log_interval: 10
+    eval_freq: 50_000
+    eval_episodes: 20
+    save_freq: 100_000
+    verbose: 1
+
+  observation_space:
+    robot_state_dim: 18  # 9 joints (pos) + 9 joints (vel)
+    object_state_dim: 7  # pos(3) + quat(4) per object
+    max_objects: 5
+    use_images: false
+    image_shape: [84, 84, 3]
+
+  reward:
+    success_reward: 10.0
+    progress_reward_scale: 1.0
+    collision_penalty: -2.0
+    time_penalty: -0.01
+    energy_penalty_scale: 0.001
+    smooth_penalty_scale: 0.01
+    drop_penalty: -1.0
+    goal_distance_scale: 2.0

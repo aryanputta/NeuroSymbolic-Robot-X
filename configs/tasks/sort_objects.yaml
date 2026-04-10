@@ -1,0 +1,59 @@
+task:
+  name: sort_objects
+  description: "Sort objects into bins by color"
+  difficulty: medium
+
+  objects:
+    - name: red_block_1
+      type: cube
+      size: [0.045, 0.045, 0.045]
+      color: [1.0, 0.2, 0.2, 1.0]
+      category: red
+      mass: 0.1
+      spawn_region: {x: [0.3, 0.55], y: [-0.25, 0.25], z: [0.45, 0.45]}
+
+    - name: blue_block_1
+      type: cube
+      size: [0.045, 0.045, 0.045]
+      color: [0.2, 0.2, 1.0, 1.0]
+      category: blue
+      mass: 0.1
+      spawn_region: {x: [0.3, 0.55], y: [-0.25, 0.25], z: [0.45, 0.45]}
+
+    - name: red_block_2
+      type: cube
+      size: [0.045, 0.045, 0.045]
+      color: [1.0, 0.2, 0.2, 1.0]
+      category: red
+      mass: 0.1
+      spawn_region: {x: [0.3, 0.55], y: [-0.25, 0.25], z: [0.45, 0.45]}
+
+    - name: red_bin
+      type: bin
+      size: [0.18, 0.18, 0.06]
+      color: [0.8, 0.1, 0.1, 1.0]
+      mass: 0.5
+      spawn_region: {x: [0.6, 0.65], y: [-0.35, -0.25], z: [0.42, 0.42]}
+      is_static: true
+      accepts: red
+
+    - name: blue_bin
+      type: bin
+      size: [0.18, 0.18, 0.06]
+      color: [0.1, 0.1, 0.8, 1.0]
+      mass: 0.5
+      spawn_region: {x: [0.6, 0.65], y: [0.25, 0.35], z: [0.42, 0.42]}
+      is_static: true
+      accepts: blue
+
+  success_criteria:
+    all_sorted: true
+    position_tolerance: 0.06
+    require_stable: true
+    stable_steps: 15
+
+  max_episode_steps: 600
+
+  instruction_templates:
+    - "Sort the blocks by color - red blocks in the red bin, blue blocks in the blue bin."
+    - "Separate the red and blue cubes into their matching colored bins."

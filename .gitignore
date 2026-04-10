@@ -1,0 +1,73 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# PHYSAI-RL-ROBOT-X  —  .gitignore
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+.env
+
+# ── IDE / editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── ML / Training artefacts ───────────────────────────────────────────────────
+wandb/
+runs/
+*.pt
+*.pth
+*.ckpt
+# keep the placeholder so the directory is tracked
+!models/checkpoints/.gitkeep
+
+# ── Data directories ──────────────────────────────────────────────────────────
+data/raw/
+data/processed/
+data/trajectories/
+data/failure_logs/
+# keep placeholders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/trajectories/.gitkeep
+!data/failure_logs/.gitkeep
+
+# ── Results ───────────────────────────────────────────────────────────────────
+results/videos/*.mp4
+results/logs/*.jsonl
+# keep placeholders
+!results/videos/.gitkeep
+!results/logs/.gitkeep
+
+# ── Isaac Sim cache ───────────────────────────────────────────────────────────
+_isaac_sim/
+isaac_cache/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS artefacts ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+
+# ── Secrets / credentials ─────────────────────────────────────────────────────
+.env
+*.key
+*.pem
+secrets.yaml

@@ -1,0 +1,51 @@
+skills:
+  move_to:
+    description: "Move end-effector to target object or position"
+    parameters:
+      target: "object name or [x,y,z] position"
+      approach_height: "optional z offset for approach (default 0.1)"
+    example: {"skill": "move_to", "target": "red_block", "approach_height": 0.1}
+
+  grasp:
+    description: "Close gripper to grasp target object"
+    parameters:
+      target: "object to grasp (must be at current position)"
+      grip_force: "optional grip force (0.0-1.0, default 0.5)"
+    example: {"skill": "grasp", "target": "red_block"}
+
+  release:
+    description: "Open gripper to release held object"
+    parameters:
+      target: "object being released"
+    example: {"skill": "release", "target": "red_block"}
+
+  push:
+    description: "Push object along surface toward target position"
+    parameters:
+      target: "object to push"
+      direction: "[dx, dy] push direction vector"
+      distance: "push distance in meters"
+    example: {"skill": "push", "target": "blue_block", "direction": [1.0, 0.0], "distance": 0.1}
+
+  place_at:
+    description: "Place held object at target location or on top of target object"
+    parameters:
+      target: "location name, object name, or [x,y,z] position"
+    example: {"skill": "place_at", "target": "bin_A"}
+
+  open_drawer:
+    description: "Open target drawer or container"
+    parameters:
+      target: "drawer or container name"
+    example: {"skill": "open_drawer", "target": "drawer_1"}
+
+  reset:
+    description: "Reset robot to home position and drop held objects"
+    parameters: {}
+    example: {"skill": "reset"}
+
+  wait:
+    description: "Wait for specified duration"
+    parameters:
+      duration: "wait time in seconds"
+    example: {"skill": "wait", "duration": 0.5}

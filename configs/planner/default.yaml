@@ -1,0 +1,41 @@
+# @package _global_
+planner:
+  type: llm  # llm | vla | openvla | groot | scripted
+
+  llm:
+    provider: openai  # openai | anthropic | local | mock
+    model: gpt-4o
+    temperature: 0.1
+    max_tokens: 512
+    timeout: 10.0
+    retry_attempts: 3
+    cache_plans: true
+
+  vla:
+    model_path: openvla/openvla-7b
+    device: cuda
+    precision: bf16
+    batch_size: 1
+    max_action_steps: 20
+
+  groot:
+    model_path: nvidia/GR00T-N1-2B
+    device: cuda
+    precision: bf16
+
+  output_schema:
+    max_skills: 10
+    allowed_skills: [move_to, grasp, release, push, pull, open_gripper, close_gripper, reset, wait]
+    validate_targets: true
+    validate_bounds: true
+
+  prompts:
+    system_prompt_path: configs/planner/system_prompt.txt
+    skill_descriptions_path: configs/planner/skill_descriptions.yaml
+    few_shot_examples: 3
+
+  latency:
+    replan_on_failure: true
+    max_replan_attempts: 3
+    replan_cooldown: 1.0  # seconds
+    cache_ttl: 30.0  # cache plan for N seconds
